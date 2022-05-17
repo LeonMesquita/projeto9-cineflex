@@ -1,3 +1,32 @@
 *{
     box-sizing: border-box;
 }
+
+body{
+    background: #FFFFFF;
+}
+
+.main-container{
+    width: 375px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+
+}
+
+.top-bar{
+    background-color: #C3CFD9;
+    height: 67px;
+    width: 100%;
+    color: #E8833A;
+    font-size: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 40px;
+    
+}
