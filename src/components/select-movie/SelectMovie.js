@@ -1,43 +1,22 @@
 import './select-movie-style.css'
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 export default function SelectMovie(){
-    const movies = [
-        {
-            title: "2067",
-            image: "images/image 3.svg",
-        },
-        {
-            title: "Enola Holmes",
-            image: "images/image 6.svg"
-        },
-        {
-            title: "2067",
-            image: "images/image 3.svg",
-        },
-        {
-            title: "Enola Holmes",
-            image: "images/image 6.svg"
-        },        {
-            title: "2067",
-            image: "images/image 3.svg",
-        },
-        {
-            title: "Enola Holmes",
-            image: "images/image 6.svg"
-        },        {
-            title: "2067",
-            image: "images/image 3.svg",
-        },
-        {
-            title: "Enola Holmes",
-            image: "images/image 6.svg"
-        },
-    ]
+
+    const [movies, setMovies] = useState([]);
+    useEffect(() => {
+        const promise = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
+
+        promise.then(response =>{
+            setMovies([...response.data]);
+        })
+    }, [])
     return(
        <>
             <h2>Selecione o filme</h2>
           <div className='movies-div'>   
-            {movies.map((movie, index) => <Movie src={movie.image} key={index}/>)}
+            {movies.map((movie, index) => <Movie src={movie.posterURL} key={movie.id} title={movie.title}/>)}
 
           </div>       
        </>
@@ -46,11 +25,11 @@ export default function SelectMovie(){
 }
 
 
-function Movie(props){
+function Movie({src, title}){
     return(
         <Link to="/time">
         <div className='movie-container'>
-            <img src={props.src} alt=""></img>
+            <img src={src} alt=""></img>
         </div>        
         </Link>
 

@@ -1,2 +1,41 @@
 /* SelectTime styles*/
+body{
+    background-color: green;
+}
 
+.sessions-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 23px;
+}
+
+.sessions-container p{
+    font-size: 20px;
+    color: #293845;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 35px;
+    margin-bottom: 22px;
+
+}
+
+.buttons-container{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    flex-wrap: wrap;
+
+}
+
+.buttons-container button{
+    border: none;
+    background-color: #E8833A;
+    width: 83px;
+    height: 43px;
+    border-radius: 3px;
+    font-size: 18px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-right: 8px;
+    cursor: pointer;
+}
