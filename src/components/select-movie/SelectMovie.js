@@ -16,7 +16,7 @@ export default function SelectMovie(){
        <>
             <h2>Selecione o filme</h2>
           <div className='movies-div'>   
-            {movies.map((movie, index) => <Movie src={movie.posterURL} key={movie.id} title={movie.title}/>)}
+            {movies.map((movie, index) => <Movie src={movie.posterURL} key={movie.id} title={movie.title} idMovie={movie.id}/>)}
 
           </div>       
        </>
@@ -25,9 +25,9 @@ export default function SelectMovie(){
 }
 
 
-function Movie({src, title}){
+function Movie({src, title, idMovie}){
     return(
-        <Link to="/time">
+        <Link to={`/sessions/${idMovie}`}>
         <div className='movie-container'>
             <img src={src} alt=""></img>
         </div>        
@@ -35,3 +35,4 @@ function Movie({src, title}){
 
     );
 }
+//       

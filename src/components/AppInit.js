@@ -9,7 +9,7 @@ export default function AppInit(){
                 <div className="top-bar"><h1>CINEFLEX</h1></div>
                 <Routes>
                     <Route path="/" element={<SelectMovie />}/>
-                    <Route path="/time" element={<SelectTime />}/>
+                    <Route path="/sessions/:idMovie" element={<SelectTime />}/>
                 </Routes>
            </BrowserRouter>
        </div>

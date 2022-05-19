@@ -1,12 +1,12 @@
 import './style.css'
 
-export default function MovieInformations(props){
+export default function MovieInformations({src, title}){
     return(
         <div className="movie-informations">
             <div>
-                <img src={props.src} alt=''/>
+                <img src={src} alt=''/>
             </div>
-                <p>Enola Holmes</p>
+                <p>{title}</p>
         </div>
     );
 }
