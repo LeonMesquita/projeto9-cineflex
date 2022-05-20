@@ -37,7 +37,7 @@ export default function SelectSeats(){
                 <h2>Selecione o(s) assento(s)</h2>
                <SeatsContainer>
                     {seatsList.seats ? seatsList.seats.map((seat) => 
-                        <Seats seatNumber={seat.name}/>
+                        <Seats seatNumber={seat.name} color={seat.isAvailable ? "#C3CFD9" : "#FBE192"}/>
                     ) : null} 
 
 
@@ -62,9 +62,9 @@ export default function SelectSeats(){
 }
 
 
-function Seats({seatNumber}){
+function Seats({seatNumber, color}){
     return(
-        <SeatButton>
+        <SeatButton background={color}>
             <p>{seatNumber}</p>
         </SeatButton>
     );
