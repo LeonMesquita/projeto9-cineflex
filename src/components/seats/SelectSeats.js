@@ -37,7 +37,7 @@ export default function SelectSeats(){
                 <h2>Selecione o(s) assento(s)</h2>
                <SeatsContainer>
                     {seatsList.seats ? seatsList.seats.map((seat) => 
-                        <Seats seatNumber={seat.name} color={seat.isAvailable ? "#C3CFD9" : "#FBE192"}/>
+                        <Seats seatNumber={seat.name} isAvailable={seat.isAvailable}/>
                     ) : null} 
 
 
@@ -61,10 +61,15 @@ export default function SelectSeats(){
 
 }
 
+function changeColor(setColor){
+    setColor("#8DD7CF");
+}
 
-function Seats({seatNumber, color}){
+
+function Seats({seatNumber, isAvailable}){
+    const [color, setColor] = useState("#C3CFD9");
     return(
-        <SeatButton background={color}>
+        <SeatButton background={isAvailable ? color : "#FBE192"} onClick={() => changeColor(setColor)}>
             <p>{seatNumber}</p>
         </SeatButton>
     );
@@ -124,5 +129,6 @@ const SeatsInformations = styled.div`
 
     div{
         margin-bottom: 5px;
+        cursor:auto;
     }
 `
