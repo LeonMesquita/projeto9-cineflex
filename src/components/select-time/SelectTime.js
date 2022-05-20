@@ -1,6 +1,6 @@
 import MovieInformations from '../movie-informations/MovieInformations';
 import './style.css'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -14,7 +14,7 @@ export default function SelectTime(){
         })
     }, []);
     
-    console.log(sessions.days);
+    //console.log(sessions);
    // const days = [...sessions.days];
     //console.log(days);
     return(
@@ -28,9 +28,16 @@ export default function SelectTime(){
                 <p>{day.weekday} - {day.date}</p>
                 <div className='buttons-container'>
                     
-                   
-                   <SessionButton time={day.showtimes[0].name}/> 
-                   <SessionButton time={day.showtimes[1].name}/> 
+                   <Link to={`/assentos/${day.showtimes[0].id}`}>
+                        <SessionButton time={day.showtimes[0].name}/>                        
+                   </Link>
+
+                   <Link to={`/assentos/${day.showtimes[1].id}`}>
+                        <SessionButton time={day.showtimes[1].name}/>
+                   </Link>
+
+
+
 
                 </div>
                 

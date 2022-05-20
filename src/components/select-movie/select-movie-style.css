@@ -1,11 +1,6 @@
 /* SelectMovie styles*/
 
-h2{
-    font-size: 24px;
-    color: #293845;
-    margin-top: 110px;
-    
-}
+
 
 .movies-div{
     display: flex;

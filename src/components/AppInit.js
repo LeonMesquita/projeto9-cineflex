@@ -1,8 +1,8 @@
 import SelectMovie from "./select-movie/SelectMovie";
 import SelectTime from "./select-time/SelectTime";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SelectSeats from "./seats/SelectSeats";
 export default function AppInit(){
-    //<SelectMovie />
     return(
        <div className="main-container">
            <BrowserRouter>
@@ -10,6 +10,7 @@ export default function AppInit(){
                 <Routes>
                     <Route path="/" element={<SelectMovie />}/>
                     <Route path="/sessions/:idMovie" element={<SelectTime />}/>
+                    <Route path="/assentos/:idSessao" element={<SelectSeats />}/>
                 </Routes>
            </BrowserRouter>
        </div>
