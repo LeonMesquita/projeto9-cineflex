@@ -35,7 +35,7 @@ body{
 .top-bar h1 {
     font-size: 34px;
     font-family: 'Roboto', sans-serif;
-
+    font-weight: normal;
     color: #E8833A;
 }
 

@@ -43,11 +43,15 @@ export default function SelectTime(){
                 
             </div> ) : null}
             </div>
-            <MovieInformations src={sessions.posterURL} title={sessions.title}/>
+            <MovieInformations>
+                <div>
+                    <img src={sessions.posterURL} alt=''/>
+                </div>
+                <p>{sessions.title}</p>
+            </MovieInformations>
         </>
     )
 }
-//{sessions.days.map((session) => console.log("teste"))}
 
 function SessionButton(props){
     return(
