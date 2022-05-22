@@ -151,6 +151,9 @@ function changeColor(setColor, setIsActive, isActive, setIdsList,
             setSeatsNumbers(auxList2);
         }
     }
+    else{
+        alert("Este assento não está disponível")
+    }
 }
 
 

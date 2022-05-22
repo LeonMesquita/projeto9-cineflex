@@ -45,8 +45,10 @@ export default function SuccessScreen(){
                     <h3>Nome: {location.name}</h3>
                     <h3>CPF: {location.cpf}</h3>                    
                 </div>
+                <Link to='/'>
+                    <Button buttonText="Voltar para Home"/>
 
-                <Button buttonText="Voltar para Home"/>
+                </Link>
 
             </SuccessDiv>
             : null}
