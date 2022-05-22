@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import MovieInformations from '../movie-informations/MovieInformations';
 import Button from '../Button';
+import ConfirmationDialog from '../ConfirmationDialog';
 
 const activeColor = "#8DD7CF";
 const inactiveColor = "#FBE192";
@@ -48,7 +49,8 @@ export default function SelectSeats(){
                     {seatsList.seats ? seatsList.seats.map((seat, index) => 
                         <Seats seatNumber={index+1} isAvailable={seat.isAvailable}
                                 idsList={idsList} setIdsList={setIdsList} seatId={seat.id}
-                                seatsNumbers={seatsNumbers} setSeatsNumbers={setSeatsNumbers} key={index}/>
+                                seatsNumbers={seatsNumbers} setSeatsNumbers={setSeatsNumbers} key={index}
+                                />
                     ) : null} 
                
                     {
@@ -63,7 +65,7 @@ export default function SelectSeats(){
                 {idsList.map((id, index) =>
                     <InputArea>
                     <span>Nome do comprador:</span>
-                    <input type="text" placeholder='Digite seu nome...' onChange={(e) =>  saveName(e.target.value, id)}/>
+                    <input type="text" placeholder='Digite seu nome...' onChange={(e) =>  saveName(e.target.value)}/>
                     <span>CPF do comprador:</span>
                     <input type="text" placeholder='Digite seu CPF...' onChange={(e) => saveCPF(e.target.value, id)}/>
                 </InputArea>
@@ -100,8 +102,8 @@ export default function SelectSeats(){
                 </MovieInformations>
             : null
                 }
-
         </MainSeatDiv>
+   
     );
 
 
@@ -171,15 +173,10 @@ export default function SelectSeats(){
 }
 
 function changeColor(setColor, setIsActive, isActive, setIdsList,
-    idsList, seatId, isAvailable, seatNumber, seatsNumbers, setSeatsNumbers){
+    idsList, seatId, isAvailable, seatNumber, seatsNumbers, setSeatsNumbers, setDelet, choose, setChoose){
     if (isAvailable){
         if(isActive){
-            setColor(availableColor);
-            setIsActive(!isActive);
-            const auxList = idsList.filter(id => id !== seatId);
-            setIdsList(auxList);
-            const auxList2 = seatsNumbers.filter(number => number !== seatNumber);
-            setSeatsNumbers(auxList2);
+            setDelet(true);          
         }
         else{
             setColor(activeColor);
@@ -194,18 +191,47 @@ function changeColor(setColor, setIsActive, isActive, setIdsList,
     else{
         alert("Este assento não está disponível")
     }
+
+
 }
 
 
-function Seats({seatNumber, isAvailable, idsList, setIdsList, seatId, seatsNumbers, setSeatsNumbers}){
+
+function unmarkButton(setColor, setIsActive, isActive, setIdsList,
+    idsList, seatId, seatNumber, seatsNumbers, setSeatsNumbers){
+
+        setColor(availableColor);   
+        setIsActive(!isActive);
+        const auxList = idsList.filter(id => id !== seatId);
+        setIdsList(auxList);
+        const auxList2 = seatsNumbers.filter(number => number !== seatNumber);
+        setSeatsNumbers(auxList2);
+
+}
+
+function Seats({seatNumber, isAvailable, idsList, setIdsList,
+                seatId, seatsNumbers, setSeatsNumbers}){
     const [color, setColor] = useState("#C3CFD9");
     const [isActive, setIsActive] = useState(false);
+    const [delet, setDelet] = useState(false);
+    const [choose, setChoose] = useState(false);
+
     return(
+        <>
+        {delet ? <ConfirmationDialog message='Tem certeza que deseja desmarcar?'
+        onclickYes={() => {setDelet(false); unmarkButton(setColor, setIsActive, isActive, setIdsList,
+            idsList, seatId, seatNumber, seatsNumbers, setSeatsNumbers)}}
+        onclickNo={() => setDelet(false)}/>
+        :
+        null}
+
         <SeatButton background={isAvailable ? color : inactiveColor} onClick={() => 
             changeColor(setColor, setIsActive, isActive, setIdsList, idsList,
-            seatId, isAvailable, seatNumber, seatsNumbers, setSeatsNumbers)}>
+            seatId, isAvailable, seatNumber, seatsNumbers, setSeatsNumbers, setDelet, choose, setChoose)}>
             <p>{seatNumber}</p>
-        </SeatButton>
+        </SeatButton>        
+        </>
+
     );
 }
 

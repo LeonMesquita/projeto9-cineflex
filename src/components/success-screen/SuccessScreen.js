@@ -33,7 +33,6 @@ export default function SuccessScreen(){
                     <h3>{sessao.movie.title}</h3>
                     <h3>{sessao.day.date} {sessao.day.weekday}</h3>                    
                 </div>
-
                 <div>
                     <h1>Ingressos</h1>
                     {location.seats.map((seat) => <h3>Assento {seat}</h3>)}
