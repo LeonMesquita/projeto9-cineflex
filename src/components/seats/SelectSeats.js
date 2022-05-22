@@ -65,7 +65,7 @@ export default function SelectSeats(){
                 {idsList.map((id, index) =>
                     <InputArea>
                     <span>Nome do comprador:</span>
-                    <input type="text" placeholder='Digite seu nome...' onChange={(e) =>  saveName(e.target.value)}/>
+                    <input type="text" placeholder='Digite seu nome...' onChange={(e) =>  saveName(e.target.value, id)}/>
                     <span>CPF do comprador:</span>
                     <input type="text" placeholder='Digite seu CPF...' onChange={(e) => saveCPF(e.target.value, id)}/>
                 </InputArea>
@@ -148,13 +148,11 @@ export default function SelectSeats(){
        //console.log(seatsNumbers)
             const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", reservationObj);
 
-            promise.then(response => {
-                console.log('deu certo!')
-            })
+           
 
 
             //console.log(reservationObj);
-            console.log(buyers);
+       // console.log(buyers);
 
 
             /*

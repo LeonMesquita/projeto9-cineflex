@@ -21,7 +21,7 @@ export default function SuccessScreen(){
     //let seatsNumbers = [];
     //{sessao ? seatsNumbers = sessao.movie : null};
     //console.log(sessao);
-//console.log(location);
+console.log(location);
 
     return(
         <>
