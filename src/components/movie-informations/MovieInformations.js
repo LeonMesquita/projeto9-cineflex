@@ -21,7 +21,7 @@ align-items: center;
 justify-content: center;
 
 
-span{
+div{
     width: 64px;
     height: 89px;
     background-color: white;
@@ -41,12 +41,15 @@ img{
 
 p{
     color: #293845;
-    font-size: 26px;
+    font-size: 20px;
     font-family: 'Roboto', sans-serif;
     margin-left: 14px;
+    height: 117px;
+    display: flex; 
+    align-items: center;
 }
 
-div{
+span{
     display: flex;
     justify-content: start;
     align-items: center;

@@ -84,17 +84,19 @@ export default function SelectSeats(){
                 
                 {seatsList.movie ?
                 <MovieInformations>
-                <div>
-                    <span>
+                <span>
+                    <div>
                         <img src={seatsList.movie.posterURL}alt=''/>
-                    </span>
+                    </div>
                 
-         
-                    <p>{seatsList.movie.title}</p>
-                    <p>{seatsList.day.weekday} - {seatsList.day.date}</p>                      
+                    <p>
+                        {seatsList.movie.title}<br></br>
+                        {seatsList.day.weekday} - {seatsList.day.date}
+                    </p>
+                                  
         
                      
-                </div>
+                </span>
                   
               
           

@@ -1,8 +1,9 @@
 import MovieInformations from '../movie-informations/MovieInformations';
-import './style.css'
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
 
 export default function SelectTime(){
     const [sessions, setSessions] = useState({});
@@ -18,15 +19,14 @@ export default function SelectTime(){
    // const days = [...sessions.days];
     //console.log(days);
     return(
-        <>
+        <MainSessionDiv>
         <h2>Selecione o horário</h2>
             
             
-            <div className='sessions'>
             {sessions.days ? sessions.days.map((day, index) =>
-            <div className='sessions-container'>
+            <SessionsContainer>
                 <p>{day.weekday} - {day.date}</p>
-                <div className='buttons-container'>
+                <ButtonsContainer>
                     
                    <Link to={`/assentos/${day.showtimes[0].id}`}>
                         <SessionButton time={day.showtimes[0].name}/>                        
@@ -39,20 +39,19 @@ export default function SelectTime(){
 
 
 
-                </div>
+                </ButtonsContainer>
                 
-            </div> ) : null}
-            </div>
+            </SessionsContainer> ) : null}
             <MovieInformations>
-                <div>
                 <span>
+                <div>
                     <img src={sessions.posterURL} alt=''/>
-                </span>
-                    <p>{sessions.title}</p>                    
                 </div>
+                    <p>{sessions.title}</p>                    
+                </span>
 
             </MovieInformations>
-        </>
+        </MainSessionDiv>
     )
 }
 
@@ -64,15 +63,50 @@ function SessionButton(props){
     );
 }
 
-/*
-{sessions.days.map((session, index) =>
-            <div className='sessions-container'>
-                <p>{"teste"}</p>
-                <div className='buttons-container'>
-                   <SessionButton time={"time"}/>
-                   <SessionButton time={"time"}/> 
 
-                </div>
-                
-            </div> )}
-*/
+const MainSessionDiv = styled.div`
+    width: 375px;
+    display: flex;
+   flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: 127px;
+`
+
+const SessionsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 23px;
+
+    p{
+    font-size: 20px;
+    color: #293845;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 35px;
+    margin-bottom: 22px;
+
+}
+
+`
+
+const ButtonsContainer = styled.div`
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    flex-wrap: wrap;
+
+    button{
+        border: none;
+        background-color: #E8833A;
+        width: 83px;
+        height: 43px;
+        border-radius: 3px;
+        font-size: 18px;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+
+`
