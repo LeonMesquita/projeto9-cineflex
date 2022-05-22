@@ -41,9 +41,14 @@ export default function SuccessScreen(){
                 </div>
 
                 <div>
-                    <h1>Comprador</h1>
-                    <h3>Nome: {location.name}</h3>
-                    <h3>CPF: {location.cpf}</h3>                    
+                    <h1>Comprador(es)</h1>
+                    {location.buyers.map((buyer) => 
+                    <>
+                        <h3>Nome: {buyer.nome}</h3>
+                        <h3>CPF: {buyer.cpf}</h3>  
+                    </>
+                    )}
+                  
                 </div>
                 <Link to='/'>
                     <Button buttonText="Voltar para Home"/>

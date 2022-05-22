@@ -16,6 +16,7 @@ export default function SelectSeats(){
     const [CPF, setCPF] = useState('');
     const [idsList, setIdsList] = useState([]);
     const [seatsNumbers, setSeatsNumbers] = useState([]);
+    const [buyers, setBuyers] = useState([]);
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
 
@@ -41,7 +42,7 @@ export default function SelectSeats(){
     let cond = false;
 
     return(
-        <>
+        <MainSeatDiv>
                 <h2>Selecione o(s) assento(s)</h2>
                <SeatsContainer>
                     {seatsList.seats ? seatsList.seats.map((seat, index) => 
@@ -59,20 +60,19 @@ export default function SelectSeats(){
                     }
                </SeatsContainer>
             
-                <InputArea>
+                {idsList.map((id, index) =>
+                    <InputArea>
                     <span>Nome do comprador:</span>
-                    <input type="text" placeholder='Digite seu nome...' value={name} onChange={(e) => saveName(e.target.value)}/>
-                </InputArea>
-
-
-                <InputArea>
+                    <input type="text" placeholder='Digite seu nome...' onChange={(e) =>  saveName(e.target.value, id)}/>
                     <span>CPF do comprador:</span>
-                    <input type="text" placeholder='Digite seu CPF...' value={CPF} onChange={(e) => saveCPF(e.target.value)}/>
+                    <input type="text" placeholder='Digite seu CPF...' onChange={(e) => saveCPF(e.target.value, id)}/>
                 </InputArea>
+                
+               )}
 
                 {
                     idsList.length > 0 ?
-                    <Link to={`/success/${idSessao}`} state={{name: name, cpf: CPF, seats: seatsNumbers}}>
+                    <Link to={`/success/${idSessao}`} state={{buyers: buyers, seats: seatsNumbers}}>
                         <Button buttonText="Reservar assento(s)" onClick={finishReservation}/>
                     </Link>
                     :
@@ -101,31 +101,71 @@ export default function SelectSeats(){
             : null
                 }
 
-        </>
+        </MainSeatDiv>
     );
 
-    function saveName(e){
+
+    function saveName(e, id){
         setName(e);
+        let buyerObj = {
+            idAssento: id,
+            nome: name,
+            cpf: CPF
+        }
+        let aux = buyers.filter(buyer => buyer.idAssento !== id);
+      aux.push(buyerObj);
+        setBuyers(aux);
+  
+
+       // teste(buyerObj);
+       //console.log(buyers);
+
     }
 
-    function saveCPF(e){
+    function saveCPF(e, id){
         setCPF(e);
+
+        let buyerObj = {
+            idAssento: id,
+            nome: name,
+            cpf: CPF
+        }
+        let aux = buyers.filter(buyer => buyer.idAssento !== id);
+
+        aux.push(buyerObj);        
+        setBuyers(aux);
+
     }
 
     function finishReservation(){
         const reservationObj = {
             ids: idsList,
-            name: name,
-            cpf: CPF
+            buyers
         }
-       // console.log(reservationObj)
 
-       console.log(seatsNumbers)
+       //console.log(seatsNumbers)
             const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", reservationObj);
 
             promise.then(response => {
-                //console.log('deu certo!')
+                console.log('deu certo!')
             })
+
+
+            //console.log(reservationObj);
+            console.log(buyers);
+
+
+            /*
+            {
+                ids: [1, 2, 3], // ids dos assentos
+                compradores: [
+                    { idAssento: 1, nome: "Fulano", cpf: "12345678900" },
+                    { idAssento: 2, nome: "Fulano 2", cpf: "12345678901" },
+                    { idAssento: 3, nome: "Fulano 3", cpf: "12345678902" },
+                ]
+            }
+            
+            */
        
     }
 }
@@ -171,6 +211,13 @@ function Seats({seatNumber, isAvailable, idsList, setIdsList, seatId, seatsNumbe
 
 
 
+const MainSeatDiv = styled.div`
+   display: flex;
+   flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 127px;
+`
 
 const SeatsContainer = styled.div`
     display: flex;
@@ -234,12 +281,14 @@ const InputArea = styled.div`
     margin-top: 7px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
     span{
         color: #293845;
         font-size: 18px;
         font-family: 'Roboto', sans-serif;
         font-weight: normal;
         text-align: start;
+        margin-top: 5px;
     }
 
     input{

@@ -20,6 +20,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 
+
 span{
     width: 64px;
     height: 89px;
