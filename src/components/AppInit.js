@@ -3,6 +3,7 @@ import SelectTime from "./select-time/SelectTime";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SelectSeats from "./seats/SelectSeats";
 import SuccessScreen from "./success-screen/SuccessScreen";
+import React from 'react'
 export default function AppInit(){
     return(
        <div className="main-container">
@@ -12,9 +13,11 @@ export default function AppInit(){
                     <Route path="/" element={<SelectMovie />}/>
                     <Route path="/sessions/:idMovie" element={<SelectTime />}/>
                     <Route path="/assentos/:idSessao" element={<SelectSeats />}/>
-                    <Route path="/success/:idSessao" element={<SuccessScreen />}/>
+                    <Route path="/success/:idSessao" element={<SuccessScreen/>}/>
                 </Routes>
            </BrowserRouter>
        </div>
     );
 }
+
+//                    

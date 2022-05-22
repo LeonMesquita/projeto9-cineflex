@@ -15,6 +15,7 @@ export default function SelectSeats(){
     const [name, setName] = useState('');
     const [CPF, setCPF] = useState('');
     const [idsList, setIdsList] = useState([]);
+    const [seatsNumbers, setSeatsNumbers] = useState([]);
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
 
@@ -23,7 +24,6 @@ export default function SelectSeats(){
         });
     }, []);
 
-    console.log(seatsList);
     const seatsInformations = [
         {
             status: "Selecionado",
@@ -38,19 +38,18 @@ export default function SelectSeats(){
             color: inactiveColor
         },
     ]
-
+    let cond = false;
 
     return(
         <>
                 <h2>Selecione o(s) assento(s)</h2>
                <SeatsContainer>
-                    {seatsList.seats ? seatsList.seats.map((seat) => 
-                        <Seats seatNumber={seat.name} isAvailable={seat.isAvailable}
-                                idsList={idsList} setIdsList={setIdsList} seatId={seat.id}/>
+                    {seatsList.seats ? seatsList.seats.map((seat, index) => 
+                        <Seats seatNumber={index+1} isAvailable={seat.isAvailable}
+                                idsList={idsList} setIdsList={setIdsList} seatId={seat.id}
+                                seatsNumbers={seatsNumbers} setSeatsNumbers={setSeatsNumbers} key={index}/>
                     ) : null} 
-
-
-                
+               
                     {
                         seatsInformations.map((seats) => 
                         <SeatsInformations>
@@ -71,17 +70,33 @@ export default function SelectSeats(){
                     <input type="text" placeholder='Digite seu CPF...' value={CPF} onChange={(e) => saveCPF(e.target.value)}/>
                 </InputArea>
 
-                <Link to={`/success/${idSessao}`}>
-                    <Button buttonText="Reservar assento(s)" onClick={finishReservation}/>
-                </Link>
+                {
+                    idsList.length > 0 ?
+                    <Link to={`/success/${idSessao}`} state={{name: name, cpf: CPF, seats: seatsNumbers}}>
+                        <Button buttonText="Reservar assento(s)" onClick={finishReservation}/>
+                    </Link>
+                    :
+                    <Button buttonText="Reservar assento(s)" color="lightgrey"/>
+                }
+
                 
                 {seatsList.movie ?
                 <MovieInformations>
                 <div>
-                    <img src={seatsList.movie.posterURL}alt=''/>
+                    <span>
+                        <img src={seatsList.movie.posterURL}alt=''/>
+                    </span>
+                
+         
+                    <p>{seatsList.movie.title}</p>
+                    <p>{seatsList.day.weekday} - {seatsList.day.date}</p>                      
+        
+                     
                 </div>
-                <p>{seatsList.movie.title}</p>
-                <p>{seatsList.day.weekday} - {seatsList.day.date}</p>
+                  
+              
+          
+
                 </MovieInformations>
             : null
                 }
@@ -103,43 +118,49 @@ export default function SelectSeats(){
             name: name,
             cpf: CPF
         }
-        console.log(reservationObj)
+       // console.log(reservationObj)
 
-       
+       console.log(seatsNumbers)
             const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", reservationObj);
 
             promise.then(response => {
-                console.log('deu certo!')
+                //console.log('deu certo!')
             })
        
     }
 }
 
-function changeColor(setColor, setIsActive, isActive, setIdsList, idsList, seatId, isAvailable){
+function changeColor(setColor, setIsActive, isActive, setIdsList,
+    idsList, seatId, isAvailable, seatNumber, seatsNumbers, setSeatsNumbers){
     if (isAvailable){
         if(isActive){
             setColor(availableColor);
             setIsActive(!isActive);
             const auxList = idsList.filter(id => id !== seatId);
             setIdsList(auxList);
-
+            const auxList2 = seatsNumbers.filter(number => number !== seatNumber);
+            setSeatsNumbers(auxList2);
         }
         else{
             setColor(activeColor);
             setIsActive(!isActive);
             const auxList = [...idsList, seatId];
             setIdsList(auxList);
+            const auxList2 = [...seatsNumbers, seatNumber];
+            seatsNumbers = auxList2;
+            setSeatsNumbers(auxList2);
         }
     }
 }
 
 
-function Seats({seatNumber, isAvailable, idsList, setIdsList, seatId}){
+function Seats({seatNumber, isAvailable, idsList, setIdsList, seatId, seatsNumbers, setSeatsNumbers}){
     const [color, setColor] = useState("#C3CFD9");
     const [isActive, setIsActive] = useState(false);
     return(
         <SeatButton background={isAvailable ? color : inactiveColor} onClick={() => 
-            changeColor(setColor, setIsActive, isActive, setIdsList, idsList, seatId, isAvailable)}>
+            changeColor(setColor, setIsActive, isActive, setIdsList, idsList,
+            seatId, isAvailable, seatNumber, seatsNumbers, setSeatsNumbers)}>
             <p>{seatNumber}</p>
         </SeatButton>
     );

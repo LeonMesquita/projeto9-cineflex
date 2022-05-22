@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 
-export default function Button({buttonText, onClick}){
+export default function Button({buttonText, onClick, color}){
     return(
-        <ButtonStyle onClick={onClick}>
+        <ButtonStyle onClick={onClick} color={color}>
            { buttonText}
         </ButtonStyle>
     );
@@ -12,10 +12,10 @@ export default function Button({buttonText, onClick}){
 const ButtonStyle = styled.button`
     width: 225px;
     height: 42px;
-    background-color: #E8833A;
+    background-color: ${props => props.color ? props.color : "#E8833A"};
     border-radius: 3px;
     border: none;
-    margin-top: 57px;
+    margin-top: 67px;
     color: white;
     font-size: 18px;
     font-family: 'Roboto',sans-serif;

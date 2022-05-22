@@ -45,9 +45,12 @@ export default function SelectTime(){
             </div>
             <MovieInformations>
                 <div>
+                <span>
                     <img src={sessions.posterURL} alt=''/>
+                </span>
+                    <p>{sessions.title}</p>                    
                 </div>
-                <p>{sessions.title}</p>
+
             </MovieInformations>
         </>
     )
