@@ -147,27 +147,7 @@ export default function SelectSeats(){
             buyers
         }
 
-       //console.log(seatsNumbers)
             const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", reservationObj);
-
-           
-
-
-            //console.log(reservationObj);
-       // console.log(buyers);
-
-
-            /*
-            {
-                ids: [1, 2, 3], // ids dos assentos
-                compradores: [
-                    { idAssento: 1, nome: "Fulano", cpf: "12345678900" },
-                    { idAssento: 2, nome: "Fulano 2", cpf: "12345678901" },
-                    { idAssento: 3, nome: "Fulano 3", cpf: "12345678902" },
-                ]
-            }
-            
-            */
        
     }
 }

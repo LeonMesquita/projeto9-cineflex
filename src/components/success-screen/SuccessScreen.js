@@ -25,9 +25,10 @@ console.log(location);
 
     return(
         <>
-            <h4>Pedido feito com sucesso!</h4>
+            
             {sessao.movie ? 
             <SuccessDiv>
+                <h4>Pedido feito com sucesso!</h4>
                 <div>
                     <h1>Filme e sessão</h1>
                     <h3>{sessao.movie.title}</h3>
@@ -76,6 +77,7 @@ h1{
     font-size: 24px;
     text-align: start;
     margin-bottom: 5px;
+    font-style: normal;
 }
 
 h3{
@@ -86,10 +88,25 @@ h3{
     letter-spacing: 0.04em;
     margin-top: 0;
     margin-bottom: 0;
+    font-style: normal;
+
 }
 
 div{
     margin-bottom: 40px;
     align-self: baseline;
+
+}
+
+h4{
+    font-size: 24px;
+    color: #247A6B;
+    margin-top: 110px;
+    font-family: 'Roboto' sans-serif;
+    text-align: center;
+    letter-spacing: 0.04em;
+    font-weight:700;
+    margin-bottom: 40px;
+
 }
 `

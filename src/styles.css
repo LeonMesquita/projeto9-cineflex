@@ -18,26 +18,6 @@ body{
 
 }
 
-.top-bar{
-    background-color: #C3CFD9;
-    height: 67px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-    position: fixed;
-    top: 0;
-
-    
-}
-
-.top-bar h1 {
-    font-size: 34px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: normal;
-    color: #E8833A;
-}
 
 
 h2{
@@ -49,12 +29,3 @@ h2{
 }
 
 
-h4{
-    font-size: 24px;
-    color: #247A6B;
-    margin-top: 110px;
-    font-family: 'Roboto' sans-serif;
-    font-weight:700;
-    text-align: center;
-    letter-spacing: 0.04em;
-}

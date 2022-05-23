@@ -4,11 +4,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SelectSeats from "./seats/SelectSeats";
 import SuccessScreen from "./success-screen/SuccessScreen";
 import React from 'react'
+import NavBar from "./NavBar";
+import { useLocation } from 'react-router-dom'
+
 export default function AppInit(){
+   // let location = useLocation();
+    //console.log(location.pathname);
     return(
        <div className="main-container">
+            
            <BrowserRouter>
-                <div className="top-bar"><h1>CINEFLEX</h1></div>
+           <NavBar />
                 <Routes>
                     <Route path="/" element={<SelectMovie />}/>
                     <Route path="/sessions/:idMovie" element={<SelectTime />}/>

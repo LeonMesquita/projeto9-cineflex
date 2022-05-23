@@ -3,9 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 
-export default function SelectTime(){
+export default function SelectTime(props){
     const [sessions, setSessions] = useState({});
     const {idMovie} = useParams();
     useEffect(() => {
@@ -15,14 +16,22 @@ export default function SelectTime(){
         })
     }, []);
     
+   
+   // let history = useHistory();
     //console.log(sessions);
    // const days = [...sessions.days];
     //console.log(days);
+    //console.log(props);
+    //console.log(idMovie)
+    let navigate = useNavigate();
+    function handleClick(){
+
+        navigate("/");
+    }
+
     return(
         <MainSessionDiv>
         <h2>Selecione o horário</h2>
-            
-            
             {sessions.days ? sessions.days.map((day, index) =>
             <SessionsContainer>
                 <p>{day.weekday} - {day.date}</p>
