@@ -1,15 +1,12 @@
 import SelectMovie from "./select-movie/SelectMovie";
-import SelectTime from "./select-time/SelectTime";
+import SelectTime from "./select-time/SelectSession";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SelectSeats from "./seats/SelectSeats";
 import SuccessScreen from "./success-screen/SuccessScreen";
 import React from 'react'
 import NavBar from "./NavBar";
-import { useLocation } from 'react-router-dom'
 
 export default function AppInit(){
-   // let location = useLocation();
-    //console.log(location.pathname);
     return(
        <div className="main-container">
             
@@ -24,6 +21,4 @@ export default function AppInit(){
            </BrowserRouter>
        </div>
     );
-}
-
-//                    
+}        

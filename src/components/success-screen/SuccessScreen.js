@@ -7,7 +7,6 @@ import Button from '../Button';
 
 export default function SuccessScreen(){
     const {idSessao} = useParams();
-   // const {stateParam} = useLocation().state;
     const location = useLocation().state;
     const [sessao, setSessao] = useState({});
     useEffect(() => {
@@ -18,9 +17,6 @@ export default function SuccessScreen(){
     });
 }, []);
 
-    //let seatsNumbers = [];
-    //{sessao ? seatsNumbers = sessao.movie : null};
-    //console.log(sessao);
 console.log(location);
 
     return(

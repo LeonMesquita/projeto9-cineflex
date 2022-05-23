@@ -2,7 +2,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import NavBar from '../NavBar';
 
 export default function SelectMovie(){
 
@@ -18,7 +17,7 @@ export default function SelectMovie(){
        <>
             <h2>Selecione o filme</h2>
           <MoviesDiv>   
-            {movies.map((movie, index) => <Movie src={movie.posterURL} key={movie.id} title={movie.title} idMovie={movie.id}/>)}
+            {movies.map((movie) => <Movie src={movie.posterURL} key={movie.id} title={movie.title} idMovie={movie.id}/>)}
 
           </MoviesDiv>       
        </>
@@ -27,7 +26,7 @@ export default function SelectMovie(){
 }
 
 
-function Movie({src, title, idMovie}){
+function Movie({src, idMovie}){
     return(
         <Link to={`/sessions/${idMovie}`}>
         <MovieContainer>
@@ -37,7 +36,6 @@ function Movie({src, title, idMovie}){
 
     );
 }
-//       
 
 const MoviesDiv = styled.div`
     display: flex;

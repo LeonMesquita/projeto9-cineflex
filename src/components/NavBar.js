@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from "react-router-dom";
 
-export default function NavBar({isInitialPage}){
+export default function NavBar(){
     let location = useLocation();
-    console.log(location.pathname);
     let navigate = useNavigate();
     function handleClick(){
         navigate(-1);
@@ -13,7 +11,7 @@ export default function NavBar({isInitialPage}){
         <Navbar>
             <div>
                 {location.pathname === '/' ? null :
-                <BackButton onClick={handleClick}><img src='/images/arrow-back-outline.svg'/></BackButton>}
+                <BackButton onClick={handleClick}><img src='/images/arrow-back-outline.svg' alt=''/></BackButton>}
                 <h1>CINEFLEX</h1>
             </div>
          

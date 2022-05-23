@@ -22,5 +22,6 @@ const ButtonStyle = styled.button`
     letter-spacing: 0.04em;
     font-weight: normal;
     cursor: pointer;
+
    
 `

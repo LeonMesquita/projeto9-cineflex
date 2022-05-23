@@ -3,10 +3,9 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
 
 
-export default function SelectTime(props){
+export default function SelectSession(){
     const [sessions, setSessions] = useState({});
     const {idMovie} = useParams();
     useEffect(() => {
@@ -15,20 +14,6 @@ export default function SelectTime(props){
             setSessions({...response.data});
         })
     }, []);
-    
-   
-   // let history = useHistory();
-    //console.log(sessions);
-   // const days = [...sessions.days];
-    //console.log(days);
-    //console.log(props);
-    //console.log(idMovie)
-    let navigate = useNavigate();
-    function handleClick(){
-
-        navigate("/");
-    }
-
     return(
         <MainSessionDiv>
         <h2>Selecione o horário</h2>
@@ -36,7 +21,6 @@ export default function SelectTime(props){
             <SessionsContainer>
                 <p>{day.weekday} - {day.date}</p>
                 <ButtonsContainer>
-                    
                    <Link to={`/assentos/${day.showtimes[0].id}`}>
                         <SessionButton time={day.showtimes[0].name}/>                        
                    </Link>
@@ -44,10 +28,6 @@ export default function SelectTime(props){
                    <Link to={`/assentos/${day.showtimes[1].id}`}>
                         <SessionButton time={day.showtimes[1].name}/>
                    </Link>
-
-
-
-
                 </ButtonsContainer>
                 
             </SessionsContainer> ) : null}

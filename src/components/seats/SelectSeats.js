@@ -40,7 +40,6 @@ export default function SelectSeats(){
             color: inactiveColor
         },
     ]
-    let cond = false;
 
     return(
         <MainSeatDiv>
@@ -113,42 +112,35 @@ export default function SelectSeats(){
         setName(e);
         let buyerObj = {
             idAssento: id,
-            nome: name,
+            nome: e,
             cpf: CPF
         }
-        let aux = buyers.filter(buyer => buyer.idAssento !== id);
+      let aux = buyers.filter(buyer => buyer.idAssento !== id);
       aux.push(buyerObj);
-        setBuyers(aux);
-  
-
-       // teste(buyerObj);
-       //console.log(buyers);
-
+        setBuyers(aux); 
     }
+
 
     function saveCPF(e, id){
         setCPF(e);
-
         let buyerObj = {
             idAssento: id,
             nome: name,
-            cpf: CPF
+            cpf: e
         }
         let aux = buyers.filter(buyer => buyer.idAssento !== id);
-
         aux.push(buyerObj);        
         setBuyers(aux);
-
     }
+
+
 
     function finishReservation(){
         const reservationObj = {
             ids: idsList,
             buyers
         }
-
-            const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", reservationObj);
-       
+       axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", reservationObj);
     }
 }
 
@@ -169,7 +161,7 @@ function changeColor(setColor, setIsActive, isActive, setIdsList,
         }
     }
     else{
-        alert("Este assento não está disponível")
+        alert("Este assento não está disponível");
     }
 
 
@@ -218,10 +210,9 @@ function Seats({seatNumber, isAvailable, idsList, setIdsList,
 
 
 const MainSeatDiv = styled.div`
-   display: flex;
-   flex-direction: column;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin-bottom: 127px;
 `
 

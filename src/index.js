@@ -1,6 +1,9 @@
 import ReactDOM from "react-dom";
 import AppInit from "./components/AppInit";
-import './styles.css'
+import './reset.css';
+import './styles.css';
+
+
 
 function AppBody(){
     return(
